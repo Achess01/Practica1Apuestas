@@ -4,6 +4,7 @@
 package com.achess.practica1apuestas;
 
 import com.achess.practica1apuestas.UI.PanelApuestas;
+import com.achess.practica1apuestas.UI.PanelResultados;
 import javax.swing.SwingUtilities;
 
 /**
@@ -13,6 +14,7 @@ import javax.swing.SwingUtilities;
 public class MainFrame extends javax.swing.JFrame {
 
     private PanelApuestas apuestas;
+    private PanelResultados resultados;
     /**
      * Creates new form MainFrame
      */
@@ -22,8 +24,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void customInit(){
+        this.setLocationRelativeTo(null);
         apuestas = new PanelApuestas();
         panelMenus.add(apuestas);
+        resultados = new PanelResultados();                
     }
 
     /**
@@ -42,6 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelMenus = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Carrera de caballos");
         setResizable(false);
         setSize(new java.awt.Dimension(771, 429));
 
@@ -68,6 +73,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(151, 123, 252));
         jButton2.setForeground(java.awt.Color.white);
         jButton2.setText("Resultados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -88,11 +98,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        panelMenus.removeAll();
-        PanelApuestas pa = new PanelApuestas();
-        panelMenus.add(pa);
+        panelMenus.removeAll();        
+        panelMenus.add(apuestas);
         SwingUtilities.updateComponentTreeUI(panelMenus);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        panelMenus.removeAll();        
+        panelMenus.add(resultados);
+        SwingUtilities.updateComponentTreeUI(panelMenus);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
