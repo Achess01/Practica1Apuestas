@@ -3,17 +3,27 @@
  */
 package com.achess.practica1apuestas;
 
+import com.achess.practica1apuestas.UI.PanelApuestas;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author achess
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private PanelApuestas apuestas;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        customInit();
+    }
+    
+    private void customInit(){
+        apuestas = new PanelApuestas();
+        panelMenus.add(apuestas);
     }
 
     /**
@@ -29,9 +39,11 @@ public class MainFrame extends javax.swing.JFrame {
         panelNav = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        panelMenus = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(new java.awt.Dimension(771, 429));
 
         panelNav.setBackground(new java.awt.Color(31, 31, 35));
         panelNav.setLayout(new java.awt.GridBagLayout());
@@ -39,6 +51,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(151, 123, 252));
         jButton1.setForeground(java.awt.Color.white);
         jButton1.setText("Apuestas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -61,23 +78,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         getContentPane().add(panelNav, java.awt.BorderLayout.LINE_START);
 
-        jPanel2.setBackground(new java.awt.Color(14, 14, 16));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        panelMenus.setBackground(new java.awt.Color(14, 14, 16));
+        panelMenus.setMinimumSize(new java.awt.Dimension(675, 437));
+        panelMenus.setPreferredSize(new java.awt.Dimension(675, 437));
+        getContentPane().add(panelMenus, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        panelMenus.removeAll();
+        PanelApuestas pa = new PanelApuestas();
+        panelMenus.add(pa);
+        SwingUtilities.updateComponentTreeUI(panelMenus);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,7 +132,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel panelMenus;
     private javax.swing.JPanel panelNav;
     // End of variables declaration//GEN-END:variables
 }
