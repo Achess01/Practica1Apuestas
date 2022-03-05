@@ -5,6 +5,7 @@ package com.achess.practica1apuestas.UI;
 
 import com.achess.practica1apuestas.betsLogic.Bet;
 import com.achess.practica1apuestas.betsLogic.Bets;
+import com.achess.practica1apuestas.file.FileManagment;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -207,6 +208,11 @@ public class PanelApuestas extends javax.swing.JPanel {
         jButton3.setBackground(new java.awt.Color(151, 123, 252));
         jButton3.setForeground(java.awt.Color.white);
         jButton3.setText("Cargar archivo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(250, 66, 59));
         jButton4.setForeground(java.awt.Color.white);
@@ -380,7 +386,8 @@ public class PanelApuestas extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
+        Bets.getBets().validate();
+        Bets.getBets().getRejected().escribir();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -432,6 +439,16 @@ public class PanelApuestas extends javax.swing.JPanel {
         combo10mo.setSelectedIndex(9);
         SwingUtilities.updateComponentTreeUI(this);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(FileManagment.open()){
+            JOptionPane.showMessageDialog(this, "Cargado con éxito");
+            //Bets.getBets().getNoVerified().escribir()<;
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al cargar el archivo");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

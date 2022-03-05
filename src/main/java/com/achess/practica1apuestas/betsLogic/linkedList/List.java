@@ -8,7 +8,7 @@ package com.achess.practica1apuestas.betsLogic.linkedList;
  * @author achess
  */
 public class List<T> {
-    private Node head;
+    private Node<T> head;
     private int len;
     
     public List(){
@@ -19,18 +19,30 @@ public class List<T> {
         Node<T> node = new Node(data);
         if(head == null){
             head = node;
-        }else{    
-            Node aux = head;
-            node.setNext(aux);
+        }else{                
+            node.setNext(head);
+            head = node;            
+        }
+        len++;
+    }
+    
+    public void push(Node<T> node){        
+        if(head == null){
+            head = node;
+        }else{                
+            node.setNext(head);
             head = node;            
         }
         len++;
     }
     
     public Node pop(){
-        Node aux = head;
-        head = head.getNext();
-        return aux;
+        if(head != null){
+            Node aux = head;
+            head = aux.getNext();
+            return aux;
+        }
+        return null;
     }
 
     public Node getHead() {
@@ -40,4 +52,13 @@ public class List<T> {
     public int getLen() {
         return len;
     }               
+    
+    public void escribir(){
+        Node aux = head;
+        while(aux != null){
+            System.out.println(aux.getData());
+            aux = aux.getNext();
+        }
+    }
+          
 }

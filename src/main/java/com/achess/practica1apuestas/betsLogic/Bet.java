@@ -31,6 +31,11 @@ public class Bet {
     public int[] getPositions() {
         return positions;
     }
+
+    @Override
+    public String toString() {
+        return "Bet{" + "gamblerName=" + gamblerName + ", amount=" + amount + ", positions=" + positions + ", points=" + points + '}';
+    }
     
-    
+        
 }

@@ -13,6 +13,7 @@ public class Node <T>{
 
     public Node(T data) {
         this.data = data;        
+        this.next = null;
     }
 
     public T getData() {
@@ -25,5 +26,6 @@ public class Node <T>{
 
     public void setNext(Node next) {
         this.next = next;
-    }                
+    }
+     
 }
