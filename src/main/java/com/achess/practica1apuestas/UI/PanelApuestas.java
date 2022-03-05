@@ -386,8 +386,23 @@ public class PanelApuestas extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Bets.getBets().validate();
+        Bets bets = Bets.getBets();
+        if(bets.isValidated()){
+            JOptionPane.showMessageDialog(this, "Las apuestas ya están cerradas y validadas");
+        }else{
+            bets.validate();
+        }
+    
+        
+        /*
         Bets.getBets().getRejected().escribir();
+        System.out.println("----------------");
+        System.out.println("----------------");
+        Bets.getBets().getAccepted().escribir();
+        System.out.println("----------------");
+        System.out.println("----------------");
+        Bets.getBets().getNoVerified().escribir();
+        */
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -444,7 +459,9 @@ public class PanelApuestas extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(FileManagment.open()){
             JOptionPane.showMessageDialog(this, "Cargado con éxito");
-            //Bets.getBets().getNoVerified().escribir()<;
+            //Bets.getBets().getNoVerified().escribir();
+            //System.out.println("------------------");
+            //System.out.println("------------------");
         }else{
             JOptionPane.showMessageDialog(this, "Error al cargar el archivo");
         }

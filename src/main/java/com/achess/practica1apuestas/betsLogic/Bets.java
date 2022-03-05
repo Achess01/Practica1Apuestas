@@ -47,20 +47,27 @@ public class Bets {
         rejected.push(bet);
     }
     
-    public void validate(){        
-        Node<Bet> aux = noVerified.pop();
-        while(aux != null){
-            if(Verify.validate(aux.getData().getPositions())){
-                accepted.push(aux);
+    public void validate(){       
+        if(!validated){
+            Node<Bet> aux = noVerified.pop();
+            while(aux != null){
+                if(Verify.validate(aux.getData().getPositions())){
+                    accepted.push(aux);
+                }
+                else{
+                    rejected.push(aux);
+                }
+                aux = noVerified.pop();
             }
-            else{
-                rejected.push(aux);
-            }
-            aux = noVerified.pop();
         }
+        validated = true;
         //System.gc();        
     }
 
+    public boolean isValidated() {
+        return validated;
+    }
+        
     public List<Bet> getNoVerified() {
         return noVerified;
     }

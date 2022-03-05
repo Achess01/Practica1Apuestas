@@ -34,7 +34,32 @@ public class Bet {
 
     @Override
     public String toString() {
-        return "Bet{" + "gamblerName=" + gamblerName + ", amount=" + amount + ", positions=" + positions + ", points=" + points + '}';
+        StringBuilder csv = new StringBuilder();
+        csv.append(gamblerName);
+        csv.append(",");
+        csv.append(amount);
+        csv.append(",");
+        csv.append(positions[0]);
+        csv.append(",");
+        csv.append(positions[1]);
+        csv.append(",");
+        csv.append(positions[2]);
+        csv.append(",");
+        csv.append(positions[3]);
+        csv.append(",");
+        csv.append(positions[4]);
+        csv.append(",");
+        csv.append(positions[5]);
+        csv.append(",");
+        csv.append(positions[6]);
+        csv.append(",");
+        csv.append(positions[7]);
+        csv.append(",");
+        csv.append(positions[8]);
+        csv.append(",");
+        csv.append(positions[9]);        
+        csv.append("\n");
+        return csv.toString();
     }
     
         

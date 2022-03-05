@@ -27,5 +27,9 @@ public class Node <T>{
     public void setNext(Node next) {
         this.next = next;
     }
+    
+    public String csv(){
+        return data.toString();
+    }
      
 }

@@ -40,6 +40,7 @@ public class List<T> {
         if(head != null){
             Node aux = head;
             head = aux.getNext();
+            aux.setNext(null);
             return aux;
         }
         return null;
@@ -52,6 +53,15 @@ public class List<T> {
     public int getLen() {
         return len;
     }               
+    
+    public String getCsv(){
+        StringBuilder csv = new StringBuilder();
+        Node aux = head;
+        while(aux != null){
+            csv.append(aux.csv());
+        }
+        return csv.toString();
+    }
     
     public void escribir(){
         Node aux = head;
