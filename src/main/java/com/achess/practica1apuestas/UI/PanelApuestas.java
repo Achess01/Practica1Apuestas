@@ -26,7 +26,12 @@ public class PanelApuestas extends javax.swing.JPanel {
         customInit();
     }
     
-    private void customInit(){             
+    private void customInit(){
+        if(Bets.getBets().isValidated()){
+            buttonVerify.setText("Guardar archivo");
+        }else{
+            buttonVerify.setText("Verificar apuestas");
+        }
         JTextField a = new JTextField();
         textMonto.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){                                
@@ -74,7 +79,7 @@ public class PanelApuestas extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        buttonVerify = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(14, 14, 16));
         setForeground(java.awt.Color.white);
@@ -214,12 +219,12 @@ public class PanelApuestas extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(250, 66, 59));
-        jButton4.setForeground(java.awt.Color.white);
-        jButton4.setText("Verificar apuestas");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buttonVerify.setBackground(new java.awt.Color(250, 66, 59));
+        buttonVerify.setForeground(java.awt.Color.white);
+        buttonVerify.setText("Verificar apuestas");
+        buttonVerify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                buttonVerifyActionPerformed(evt);
             }
         });
 
@@ -292,7 +297,7 @@ public class PanelApuestas extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonVerify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -339,7 +344,7 @@ public class PanelApuestas extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonVerify, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -384,15 +389,16 @@ public class PanelApuestas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_combo7moActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void buttonVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerifyActionPerformed
         // TODO add your handling code here:
         Bets bets = Bets.getBets();
-        if(bets.isValidated()){
-            JOptionPane.showMessageDialog(this, "Las apuestas ya están cerradas y validadas");
+        bets.validate();
+        if(FileManagment.selectDirectory() && FileManagment.save(bets.getRejected())){            
+                JOptionPane.showMessageDialog(this, "Archivo guardado con éxito");            
         }else{
-            bets.validate();
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
         }
-    
+        buttonVerify.setText("Guardar archivo");                    
         
         /*
         Bets.getBets().getRejected().escribir();
@@ -403,7 +409,7 @@ public class PanelApuestas extends javax.swing.JPanel {
         System.out.println("----------------");
         Bets.getBets().getNoVerified().escribir();
         */
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_buttonVerifyActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -469,6 +475,7 @@ public class PanelApuestas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonVerify;
     private javax.swing.JComboBox<String> combo10mo;
     private javax.swing.JComboBox<String> combo1ro;
     private javax.swing.JComboBox<String> combo2do;
@@ -481,7 +488,6 @@ public class PanelApuestas extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> combo9no;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

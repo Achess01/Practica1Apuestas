@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FileManagment {
     
     private static String pattern = "\\w+,[1-9]\\d*(,(10|[1-9])){10}";
+    private static File toSave;
     
     public static boolean open(){
         boolean withErrors = true;
@@ -40,7 +41,7 @@ public class FileManagment {
             }
         }
         catch (Exception ex){
-              ex.printStackTrace(System.out);
+              //ex.printStackTrace(System.out);
               withErrors = false;
         }
         finally{
@@ -49,7 +50,7 @@ public class FileManagment {
                 fr.close();
                 }
             }catch(Exception ex){
-                ex.printStackTrace(System.out);
+                //ex.printStackTrace(System.out);
                 withErrors = false;
             }                
         }
@@ -57,21 +58,26 @@ public class FileManagment {
     }
     
     
-    public static boolean selectDirectory(List rejected){                
+    
+    public static boolean selectDirectory(){                
         JFileChooser save = new JFileChooser();        
         save.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);    
-        save.showSaveDialog(null);
-        return save(save, rejected);
+        save.showSaveDialog(null);        
+        try{
+            toSave = save.getSelectedFile();
+        }catch(Exception ex){
+            toSave = null;
+        }
+        return toSave != null;        
     }
     
-    private static boolean save(JFileChooser save, List rejected){
-        boolean saved = false;                                             
-        FileWriter fw = null;                    
+    public static boolean save(List list){
+        boolean saved = false;                                                                
         try{
-            File file = save.getSelectedFile();
-            if(!file.exists()){
-                String csvFromList = rejected.getCsv();
-                PrintWriter pw = new PrintWriter(file.getPath() + ".csv");
+            //File file = save.getSelectedFile();
+            if(!toSave.exists()){
+                String csvFromList = list.getCsv();
+                PrintWriter pw = new PrintWriter(toSave.getPath() + ".csv");
                 pw.print(csvFromList); 
                 pw.close();
                 saved = true;
@@ -83,16 +89,7 @@ public class FileManagment {
         }catch (Exception ex) {
             //JOptionPane.showMessageDialog(null, "Error al guardar, ponga nombre al archivo");
             saved = false;
-        }
-        finally{
-            try{
-                if(fw!=null){
-                fw.close();
-                }
-            }catch(Exception ex){
-                saved = false;
-            }                
-        }
+        }        
         return saved;
     }
     
@@ -112,4 +109,10 @@ public class FileManagment {
         int positions[] = {c1,c2,c3,c4,c5,c6,c7,c8,c9,c10};
         Bets.getBets().addNoVerified(values[0], amount, positions);        
     }
+
+    public static boolean isToSave() {
+        return toSave != null;
+    }
+    
+    
 }

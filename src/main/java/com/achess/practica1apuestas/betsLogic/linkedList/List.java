@@ -59,6 +59,7 @@ public class List<T> {
         Node aux = head;
         while(aux != null){
             csv.append(aux.csv());
+            aux = aux.getNext();
         }
         return csv.toString();
     }
