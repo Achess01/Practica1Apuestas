@@ -26,12 +26,7 @@ public class PanelApuestas extends javax.swing.JPanel {
         customInit();
     }
     
-    private void customInit(){
-        if(Bets.getBets().isValidated()){
-            buttonVerify.setText("Guardar archivo");
-        }else{
-            buttonVerify.setText("Verificar apuestas");
-        }
+    private void customInit(){        
         JTextField a = new JTextField();
         textMonto.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){                                
@@ -41,6 +36,16 @@ public class PanelApuestas extends javax.swing.JPanel {
                 }
             }
         });
+    }
+    
+    private void saveFile(){
+        Bets bets = Bets.getBets();
+        if(FileManagment.selectDirectory() && FileManagment.save(bets.getRejected())){            
+                JOptionPane.showMessageDialog(this, "Archivo guardado con éxito");            
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
+        }
+        
     }
 
     /**
@@ -221,7 +226,7 @@ public class PanelApuestas extends javax.swing.JPanel {
 
         buttonVerify.setBackground(new java.awt.Color(250, 66, 59));
         buttonVerify.setForeground(java.awt.Color.white);
-        buttonVerify.setText("Verificar apuestas");
+        buttonVerify.setText("Verificar/Guardar");
         buttonVerify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonVerifyActionPerformed(evt);
@@ -391,14 +396,20 @@ public class PanelApuestas extends javax.swing.JPanel {
 
     private void buttonVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerifyActionPerformed
         // TODO add your handling code here:
-        Bets bets = Bets.getBets();
-        bets.validate();
-        if(FileManagment.selectDirectory() && FileManagment.save(bets.getRejected())){            
-                JOptionPane.showMessageDialog(this, "Archivo guardado con éxito");            
+        Bets bets = Bets.getBets();                        
+        if(!bets.isValidated()){
+            int value = JOptionPane.showConfirmDialog(this, "¿Quiere cerrar las apuestas?", "Verificar", JOptionPane.YES_NO_OPTION);
+            if(value == 0){
+                bets.validate();                
+                saveFile();
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
+            saveFile();
         }
-        buttonVerify.setText("Guardar archivo");                    
+        
+        
+        
+        //buttonVerify.setText("Guardar archivo");                    
         
         /*
         Bets.getBets().getRejected().escribir();
@@ -463,7 +474,11 @@ public class PanelApuestas extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(FileManagment.open()){
+        Bets bets = Bets.getBets();
+        if(bets.isValidated()){
+            JOptionPane.showMessageDialog(this, "Apuestas cerradas");
+        }
+        else if(FileManagment.open()){
             JOptionPane.showMessageDialog(this, "Cargado con éxito");
             //Bets.getBets().getNoVerified().escribir();
             //System.out.println("------------------");

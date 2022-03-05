@@ -63,6 +63,11 @@ public class Bets {
         validated = true;
         //System.gc();        
     }
+    
+    public static void clear(){
+        bets = null;
+        System.gc();
+    }
 
     public boolean isValidated() {
         return validated;

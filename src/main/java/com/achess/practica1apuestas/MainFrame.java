@@ -5,6 +5,8 @@ package com.achess.practica1apuestas;
 
 import com.achess.practica1apuestas.UI.PanelApuestas;
 import com.achess.practica1apuestas.UI.PanelResultados;
+import com.achess.practica1apuestas.betsLogic.Bets;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -43,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelNav = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         panelMenus = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 12;
         gridBagConstraints.ipady = 17;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(141, 12, 0, 12);
+        gridBagConstraints.insets = new java.awt.Insets(145, 12, 0, 12);
         panelNav.add(jButton1, gridBagConstraints);
 
         jButton2.setBackground(new java.awt.Color(151, 123, 252));
@@ -83,8 +86,25 @@ public class MainFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipady = 17;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 12, 162, 12);
+        gridBagConstraints.insets = new java.awt.Insets(18, 12, 0, 12);
         panelNav.add(jButton2, gridBagConstraints);
+
+        jButton3.setBackground(new java.awt.Color(250, 66, 59));
+        jButton3.setForeground(java.awt.Color.white);
+        jButton3.setText("RESET");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 29;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(108, 12, 12, 12);
+        panelNav.add(jButton3, gridBagConstraints);
 
         getContentPane().add(panelNav, java.awt.BorderLayout.LINE_START);
 
@@ -109,6 +129,14 @@ public class MainFrame extends javax.swing.JFrame {
         panelMenus.add(resultados);
         SwingUtilities.updateComponentTreeUI(panelMenus);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int value = JOptionPane.showConfirmDialog(this, "Los datos serán borrados\n¿Quiere continuar?", "Reset", JOptionPane.YES_NO_OPTION);
+        if(value == 0){
+            Bets.getBets().clear();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,6 +176,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel panelMenus;
     private javax.swing.JPanel panelNav;
     // End of variables declaration//GEN-END:variables
