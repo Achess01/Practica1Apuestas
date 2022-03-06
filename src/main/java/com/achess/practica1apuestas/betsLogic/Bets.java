@@ -107,12 +107,14 @@ public class Bets {
     }
         
     
-    public void sortByPoinst(){
-        accepted.setHead(mergeSort(accepted.getHead(), true));
+    public void sortByPoints(){
+        Node<Bet> newHead = mergeSort(accepted.getHead(), true);
+        accepted.setHead(newHead);
     }
     
     public void sortByNames(){
-        accepted.setHead(mergeSort(accepted.getHead(), false));
+        Node<Bet> newHead = mergeSort(accepted.getHead(), false);
+        accepted.setHead(newHead);
     }
     
     private Node<Bet> mergeSort(Node<Bet> head, boolean points){        
@@ -137,7 +139,7 @@ public class Bets {
         if(b == null){
             return a;
         }
-        if(a.getData().getPoints() <= b.getData().getPoints()){
+        if(a.getData().getPoints() >= b.getData().getPoints()){
             result = a;
             result.setNext(SortedMergeForPoints(a.getNext(), b));
         }else{
@@ -155,12 +157,12 @@ public class Bets {
         if(b== null){
             return a;
         }
-        if(a.getData().getGamblerName().compareTo(b.getData().getGamblerName()) >= 0){
+        if(a.getData().getGamblerName().compareTo(b.getData().getGamblerName()) <= 0){
             result = a;
-            result.setNext(SortedMergeForPoints(a.getNext(), b));
+            result.setNext(SortedMergeForNames(a.getNext(), b));
         }else{
             result = b;
-            result.setNext(SortedMergeForPoints(a, b.getNext()));
+            result.setNext(SortedMergeForNames(a, b.getNext()));
         }
         return result;
     }

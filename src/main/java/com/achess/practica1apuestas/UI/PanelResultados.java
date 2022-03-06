@@ -27,7 +27,7 @@ public class PanelResultados extends javax.swing.JPanel {
     
     private void getAndShowResults(){
         Bets.getBets().calculateRetults();
-        Bets.getBets().sortByPoinst();
+        Bets.getBets().sortByPoints();
         DefaultTableModel model = Verify.getModel(Bets.getBets().getAccepted());
         tableResults.setModel(model);
     }
@@ -463,7 +463,7 @@ public class PanelResultados extends javax.swing.JPanel {
         if(Bets.getBets().isFinished()){
             points = !points;
             if(points){
-                Bets.getBets().sortByPoinst();            
+                Bets.getBets().sortByPoints();            
             }else{
                 Bets.getBets().sortByNames();
             }            
