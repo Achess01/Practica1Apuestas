@@ -427,7 +427,7 @@ public class PanelApuestas extends javax.swing.JPanel {
         if(!Bets.getBets().isValidated()){
             String nombre = textName.getText();
             String montoSt = textMonto.getText();                
-            if(!nombre.trim().isEmpty() && !montoSt.trim().isEmpty()){
+            if(nombre.matches("\\w+") && montoSt.matches("[1-9]\\d*")){
                 int monto = 0;
                 try{
                     monto = Integer.parseInt(montoSt);
@@ -467,7 +467,7 @@ public class PanelApuestas extends javax.swing.JPanel {
                 combo10mo.setSelectedIndex(9);
                 SwingUtilities.updateComponentTreeUI(this);                
             }else{
-                JOptionPane.showMessageDialog(this, "Todas los campos son obligatorios");
+                JOptionPane.showMessageDialog(this, "Error en uno o más campos");
             }
         }else{
             JOptionPane.showMessageDialog(this, "Apuestas cerradas");
