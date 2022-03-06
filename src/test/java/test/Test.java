@@ -18,6 +18,7 @@ public class Test {
         //System.out.println(line.matches(pattern));
         //int array[];        
         //System.out.println(array);
+        /*
         int array[] = {1,2,3,4,5,6,7,8,9,10};
         int array2[] = {1,3,2,4,6,5,7,9,8,10};
         int array3[] = {1,3,2,3,6,5,7,9,8,10};
@@ -27,5 +28,13 @@ public class Test {
         System.out.println(Verify.validate(array2));
         System.out.println(Verify.validate(array3));
         System.out.println(Verify.validate(array4));
+        */
+        //int len = 77;
+        //int div = len/2 + 1;
+        //System.out.println(div);
+        String a = "Alexnader";
+        String b = "Alaxander";
+        int mayor =  b.compareTo(a);
+        System.out.println(mayor);
     }
 }

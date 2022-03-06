@@ -49,7 +49,7 @@ public class Verify {
                founded[5] && founded[6] && founded[7] && founded[8] && founded[9];                
     }
     
-    public DefaultTableModel getModel(List<Bet> list){
+    public static DefaultTableModel getModel(List<Bet> list){
         Node<Bet> aux = list.getHead();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("No.");

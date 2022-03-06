@@ -6,6 +6,8 @@ package com.achess.practica1apuestas.UI;
 import com.achess.practica1apuestas.betsLogic.Bets;
 import com.achess.practica1apuestas.betsLogic.Verify;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +18,18 @@ public class PanelResultados extends javax.swing.JPanel {
     /**
      * Creates new form PanelResultados
      */
+    
+    private boolean points;
     public PanelResultados() {
         initComponents();
+        points = true;
     }
     
     private void getAndShowResults(){
-        
+        Bets.getBets().calculateRetults();
+        Bets.getBets().sortByPoinst();
+        DefaultTableModel model = Verify.getModel(Bets.getBets().getAccepted());
+        tableResults.setModel(model);
     }
 
     /**
@@ -60,7 +68,7 @@ public class PanelResultados extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableResults = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jButton4.setBackground(new java.awt.Color(250, 66, 59));
@@ -215,7 +223,7 @@ public class PanelResultados extends javax.swing.JPanel {
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Ingreso de resultados");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableResults.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -241,7 +249,7 @@ public class PanelResultados extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableResults);
 
         jButton1.setBackground(new java.awt.Color(151, 123, 252));
         jButton1.setForeground(java.awt.Color.white);
@@ -452,6 +460,18 @@ public class PanelResultados extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(Bets.getBets().isFinished()){
+            points = !points;
+            if(points){
+                Bets.getBets().sortByPoinst();            
+            }else{
+                Bets.getBets().sortByNames();
+            }            
+            DefaultTableModel model = Verify.getModel(Bets.getBets().getAccepted());
+            tableResults.setModel(model);
+            SwingUtilities.updateComponentTreeUI(this);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -484,6 +504,6 @@ public class PanelResultados extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tableResults;
     // End of variables declaration//GEN-END:variables
 }

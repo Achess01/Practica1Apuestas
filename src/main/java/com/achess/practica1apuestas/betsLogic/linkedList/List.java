@@ -50,6 +50,11 @@ public class List<T> {
         return head;
     }
 
+    public void setHead(Node<T> head) {
+        this.head = head;
+    }
+        
+
     public int getLen() {
         return len;
     }               

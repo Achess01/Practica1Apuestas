@@ -108,7 +108,74 @@ public class Bets {
         
     
     public void sortByPoinst(){
+        accepted.setHead(mergeSort(accepted.getHead(), true));
+    }
+    
+    public void sortByNames(){
+        accepted.setHead(mergeSort(accepted.getHead(), false));
+    }
+    
+    private Node<Bet> mergeSort(Node<Bet> head, boolean points){        
+        if(head == null || head.getNext() == null){
+            return head;
+        }
+        Node middle = getMiddle(head);
+        Node nextoMiddle = middle.getNext();
+        middle.setNext(null);
+        Node left = mergeSort(head, points);
+        Node right = mergeSort(nextoMiddle, points);
+        if(points) return SortedMergeForPoints(left, right);
+        return SortedMergeForNames(left, right);
         
+    }
+    
+    private Node<Bet> SortedMergeForPoints(Node<Bet> a, Node<Bet> b){
+        Node<Bet> result = null;
+        if(a == null){
+            return b;
+        }
+        if(b == null){
+            return a;
+        }
+        if(a.getData().getPoints() <= b.getData().getPoints()){
+            result = a;
+            result.setNext(SortedMergeForPoints(a.getNext(), b));
+        }else{
+            result = b;
+            result.setNext(SortedMergeForPoints(a, b.getNext()));
+        }
+        return result;
+    }
+    
+    private Node<Bet> SortedMergeForNames(Node<Bet> a, Node<Bet> b){
+        Node<Bet> result = null;
+        if(a == null){
+            return b;
+        }
+        if(b== null){
+            return a;
+        }
+        if(a.getData().getGamblerName().compareTo(b.getData().getGamblerName()) >= 0){
+            result = a;
+            result.setNext(SortedMergeForPoints(a.getNext(), b));
+        }else{
+            result = b;
+            result.setNext(SortedMergeForPoints(a, b.getNext()));
+        }
+        return result;
+    }
+    
+    private Node getMiddle(Node head){
+        if(head == null){
+            return head;
+        }
+        
+        Node slow = head, fast = head;
+        while(fast.getNext() != null && fast.getNext().getNext() != null){
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+        return slow;
     }
                       
     /**
