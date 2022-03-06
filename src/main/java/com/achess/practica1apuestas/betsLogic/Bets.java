@@ -15,12 +15,15 @@ public class Bets {
     private List<Bet> accepted;
     private List<Bet> rejected;
     private boolean validated;
+    private boolean finished;
+    private int finalPositions[];
     
     private Bets(){
         noVerified = new List();
         accepted = new List();
         rejected = new List();
         validated = false;
+        finished = false;
     }
     
     public static Bets getBets(){
@@ -29,6 +32,16 @@ public class Bets {
         }
         return bets;
     }
+
+    public int[] getFinalPositions() {
+        return finalPositions;
+    }
+
+    public void setFinalPositions(int[] finalPositions) {
+        this.finalPositions = finalPositions;
+    }
+    
+    
     
     public void addNoVerified(Bet bet){
         noVerified.push(bet);
@@ -84,10 +97,15 @@ public class Bets {
     public List<Bet> getRejected() {
         return rejected;
     }
-                       
-    
-    public static void verify(){
-        
+
+    public boolean isFinished() {
+        return finished;
     }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+                       
+            
     
 }

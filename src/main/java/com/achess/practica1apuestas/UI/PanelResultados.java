@@ -3,6 +3,7 @@
  */
 package com.achess.practica1apuestas.UI;
 
+import com.achess.practica1apuestas.betsLogic.Bets;
 import com.achess.practica1apuestas.betsLogic.Verify;
 import javax.swing.JOptionPane;
 
@@ -17,6 +18,10 @@ public class PanelResultados extends javax.swing.JPanel {
      */
     public PanelResultados() {
         initComponents();
+    }
+    
+    private void getAndShowResults(){
+        
     }
 
     /**
@@ -417,23 +422,32 @@ public class PanelResultados extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        int primero = Integer.parseInt(combo1.getSelectedItem().toString());
-        int segundo = Integer.parseInt(combo2.getSelectedItem().toString());
-        int tercero = Integer.parseInt(combo3.getSelectedItem().toString());
-        int cuarto = Integer.parseInt(combo4.getSelectedItem().toString());
-        int quinto = Integer.parseInt(combo5.getSelectedItem().toString());
-        int sexto = Integer.parseInt(combo6.getSelectedItem().toString());
-        int septimo = Integer.parseInt(combo7.getSelectedItem().toString());
-        int octavo = Integer.parseInt(combo8.getSelectedItem().toString());
-        int noveno = Integer.parseInt(combo9.getSelectedItem().toString());
-        int decimo = Integer.parseInt(combo10.getSelectedItem().toString());
-        int positions[] = {primero, segundo, tercero, cuarto, quinto,
-                                  sexto, septimo, octavo, noveno, decimo};
-        if(Verify.validate(positions)){
-            JOptionPane.showMessageDialog(this, "Resultados agregados correctamente");
+        Bets bets = Bets.getBets();
+        if(bets.isValidated() && !bets.isFinished()){
+            int primero = Integer.parseInt(combo1.getSelectedItem().toString());
+            int segundo = Integer.parseInt(combo2.getSelectedItem().toString());
+            int tercero = Integer.parseInt(combo3.getSelectedItem().toString());
+            int cuarto = Integer.parseInt(combo4.getSelectedItem().toString());
+            int quinto = Integer.parseInt(combo5.getSelectedItem().toString());
+            int sexto = Integer.parseInt(combo6.getSelectedItem().toString());
+            int septimo = Integer.parseInt(combo7.getSelectedItem().toString());
+            int octavo = Integer.parseInt(combo8.getSelectedItem().toString());
+            int noveno = Integer.parseInt(combo9.getSelectedItem().toString());
+            int decimo = Integer.parseInt(combo10.getSelectedItem().toString());
+            int positions[] = {primero, segundo, tercero, cuarto, quinto,
+                                      sexto, septimo, octavo, noveno, decimo};
+            if(Verify.validate(positions)){
+                bets.setFinished(true);
+                bets.setFinalPositions(positions);
+                JOptionPane.showMessageDialog(this, "Resultados agregados correctamente");
+                getAndShowResults();
+            }else{
+                JOptionPane.showMessageDialog(this, "No pueden haber posiciones repetidas");
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "No pueden haber posiciones repetidas");
+            JOptionPane.showMessageDialog(this, "Revise que los datos estén validados y\n que los resultados no hayan sido ingresados previamente");
         }
+       
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

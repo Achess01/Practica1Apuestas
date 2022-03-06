@@ -424,52 +424,56 @@ public class PanelApuestas extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String nombre = textName.getText();
-        String montoSt = textMonto.getText();
         
-        if(!nombre.trim().isEmpty() && !montoSt.trim().isEmpty()){
-            int monto = 0;
-            try{
-                monto = Integer.parseInt(montoSt);
-            }catch(Exception ex){
-                monto = -1;
-            }
-            if(monto <= 0){
-                JOptionPane.showMessageDialog(this, "Verifique el monto");
+        if(!Bets.getBets().isValidated()){
+            String nombre = textName.getText();
+            String montoSt = textMonto.getText();                
+            if(!nombre.trim().isEmpty() && !montoSt.trim().isEmpty()){
+                int monto = 0;
+                try{
+                    monto = Integer.parseInt(montoSt);
+                }catch(Exception ex){
+                    monto = -1;
+                }
+                if(monto <= 0){
+                    JOptionPane.showMessageDialog(this, "Verifique el monto");
+                }else{
+                    int primero = Integer.parseInt(combo1ro.getSelectedItem().toString());
+                    int segundo = Integer.parseInt(combo2do.getSelectedItem().toString());
+                    int tercero = Integer.parseInt(combo3ro.getSelectedItem().toString());
+                    int cuarto = Integer.parseInt(combo4to.getSelectedItem().toString());
+                    int quinto = Integer.parseInt(combo5to.getSelectedItem().toString());
+                    int sexto = Integer.parseInt(combo6to.getSelectedItem().toString());
+                    int septimo = Integer.parseInt(combo7mo.getSelectedItem().toString());
+                    int octavo = Integer.parseInt(combo8vo.getSelectedItem().toString());
+                    int noveno = Integer.parseInt(combo9no.getSelectedItem().toString());
+                    int decimo = Integer.parseInt(combo10mo.getSelectedItem().toString());
+                    int positions[] = {primero, segundo, tercero, cuarto, quinto,
+                                      sexto, septimo, octavo, noveno, decimo};
+                    Bet bet = new Bet(nombre, monto, positions);
+                    Bets.getBets().addNoVerified(bet);
+                    JOptionPane.showMessageDialog(this, "Apuesta agregada exitosamente");
+                }
+                textName.setText("");
+                textMonto.setText("");                        
+                combo1ro.setSelectedIndex(0);                
+                combo2do.setSelectedIndex(1);
+                combo3ro.setSelectedIndex(2);
+                combo4to.setSelectedIndex(3);
+                combo5to.setSelectedIndex(4);
+                combo6to.setSelectedIndex(5);
+                combo7mo.setSelectedIndex(6);
+                combo8vo.setSelectedIndex(7);
+                combo9no.setSelectedIndex(8);
+                combo10mo.setSelectedIndex(9);
+                SwingUtilities.updateComponentTreeUI(this);                
             }else{
-                int primero = Integer.parseInt(combo1ro.getSelectedItem().toString());
-                int segundo = Integer.parseInt(combo2do.getSelectedItem().toString());
-                int tercero = Integer.parseInt(combo3ro.getSelectedItem().toString());
-                int cuarto = Integer.parseInt(combo4to.getSelectedItem().toString());
-                int quinto = Integer.parseInt(combo5to.getSelectedItem().toString());
-                int sexto = Integer.parseInt(combo6to.getSelectedItem().toString());
-                int septimo = Integer.parseInt(combo7mo.getSelectedItem().toString());
-                int octavo = Integer.parseInt(combo8vo.getSelectedItem().toString());
-                int noveno = Integer.parseInt(combo9no.getSelectedItem().toString());
-                int decimo = Integer.parseInt(combo10mo.getSelectedItem().toString());
-                int positions[] = {primero, segundo, tercero, cuarto, quinto,
-                                  sexto, septimo, octavo, noveno, decimo};
-                Bet bet = new Bet(nombre, monto, positions);
-                Bets.getBets().addNoVerified(bet);
-                JOptionPane.showMessageDialog(this, "Apuesta agregada exitosamente");
+                JOptionPane.showMessageDialog(this, "Todas los campos son obligatorios");
             }
-            
         }else{
-            JOptionPane.showMessageDialog(this, "Todas los campos son obligatorios");
+            JOptionPane.showMessageDialog(this, "Apuestas cerradas");
         }
-        textName.setText("");
-        textMonto.setText("");                        
-        combo1ro.setSelectedIndex(0);                
-        combo2do.setSelectedIndex(1);
-        combo3ro.setSelectedIndex(2);
-        combo4to.setSelectedIndex(3);
-        combo5to.setSelectedIndex(4);
-        combo6to.setSelectedIndex(5);
-        combo7mo.setSelectedIndex(6);
-        combo8vo.setSelectedIndex(7);
-        combo9no.setSelectedIndex(8);
-        combo10mo.setSelectedIndex(9);
-        SwingUtilities.updateComponentTreeUI(this);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
