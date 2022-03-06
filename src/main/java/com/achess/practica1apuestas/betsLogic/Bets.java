@@ -17,6 +17,7 @@ public class Bets {
     private boolean validated;
     private boolean finished;
     private int finalPositions[];
+    private boolean calculated;
     
     private Bets(){
         noVerified = new List();
@@ -24,6 +25,7 @@ public class Bets {
         rejected = new List();
         validated = false;
         finished = false;
+        calculated = false;
     }
     
     public static Bets getBets(){
@@ -40,9 +42,7 @@ public class Bets {
     public void setFinalPositions(int[] finalPositions) {
         this.finalPositions = finalPositions;
     }
-    
-    
-    
+            
     public void addNoVerified(Bet bet){
         noVerified.push(bet);
     }
@@ -105,7 +105,39 @@ public class Bets {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
-                       
-            
+        
+    
+    public void sortByPoinst(){
+        
+    }
+                      
+    /**
+     * Calculating final results
+     */
+    public void calculateRetults(){
+        if(!calculated){
+            Node<Bet> aux = accepted.getHead();
+            while(aux != null){
+                getPoints(aux.getData());
+                aux = aux.getNext();
+            }
+        }
+        calculated = true;
+    }
+    private void getPoints(Bet bet){
+        int gamblerPositions[] = bet.getPositions();
+        int pts = 0;
+        pts += gamblerPositions[0] == finalPositions[0] ? 10 : 0;
+        pts += gamblerPositions[1] == finalPositions[1] ? 9 : 0;
+        pts += gamblerPositions[2] == finalPositions[2] ? 8 : 0;
+        pts += gamblerPositions[3] == finalPositions[3] ? 7 : 0;
+        pts += gamblerPositions[4] == finalPositions[4] ? 6 : 0;
+        pts += gamblerPositions[5] == finalPositions[5] ? 5 : 0;
+        pts += gamblerPositions[6] == finalPositions[6] ? 4 : 0;
+        pts += gamblerPositions[7] == finalPositions[7] ? 3 : 0;
+        pts += gamblerPositions[8] == finalPositions[8] ? 2 : 0;
+        pts += gamblerPositions[9] == finalPositions[9] ? 1 : 0;                        
+        bet.addPoints(pts);
+    }
     
 }

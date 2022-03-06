@@ -31,7 +31,16 @@ public class Bet {
     public int[] getPositions() {
         return positions;
     }
+    
 
+    public void addPoints(int points) {
+        this.points += points;
+    }        
+
+    public int getPoints() {
+        return points;
+    }
+        
     @Override
     public String toString() {
         StringBuilder csv = new StringBuilder();
