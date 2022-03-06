@@ -44,8 +44,7 @@ public class PanelApuestas extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Archivo guardado con éxito");            
         }else{
             JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
-        }
-        
+        }        
     }
 
     /**

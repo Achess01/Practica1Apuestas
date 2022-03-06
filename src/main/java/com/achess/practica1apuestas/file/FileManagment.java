@@ -38,6 +38,7 @@ public class FileManagment {
             String line;
             while((line = br.readLine()) != null){                
                 if(line.matches(pattern)) addBet(line);
+                else System.out.println(line);
             }
         }
         catch (Exception ex){

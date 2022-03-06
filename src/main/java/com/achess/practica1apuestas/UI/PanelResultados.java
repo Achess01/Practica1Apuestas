@@ -5,6 +5,7 @@ package com.achess.practica1apuestas.UI;
 
 import com.achess.practica1apuestas.betsLogic.Bets;
 import com.achess.practica1apuestas.betsLogic.Verify;
+import com.achess.practica1apuestas.file.FileManagment;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ public class PanelResultados extends javax.swing.JPanel {
         Bets.getBets().calculateRetults();
         Bets.getBets().sortByPoints();
         DefaultTableModel model = Verify.getModel(Bets.getBets().getAccepted());
-        tableResults.setModel(model);
+        jTable2.setModel(model);
     }
 
     /**
@@ -68,8 +69,9 @@ public class PanelResultados extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableResults = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jButton4.setBackground(new java.awt.Color(250, 66, 59));
         jButton4.setForeground(java.awt.Color.white);
@@ -223,7 +225,7 @@ public class PanelResultados extends javax.swing.JPanel {
         jLabel2.setForeground(java.awt.Color.white);
         jLabel2.setText("Ingreso de resultados");
 
-        tableResults.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -249,7 +251,7 @@ public class PanelResultados extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tableResults);
+        jScrollPane2.setViewportView(jTable2);
 
         jButton1.setBackground(new java.awt.Color(151, 123, 252));
         jButton1.setForeground(java.awt.Color.white);
@@ -257,6 +259,15 @@ public class PanelResultados extends javax.swing.JPanel {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(151, 123, 252));
+        jButton2.setForeground(java.awt.Color.white);
+        jButton2.setText("P");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -322,7 +333,9 @@ public class PanelResultados extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -375,7 +388,9 @@ public class PanelResultados extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jButton1)
-                        .addContainerGap(132, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addContainerGap(89, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(22, 22, 22)
@@ -468,11 +483,23 @@ public class PanelResultados extends javax.swing.JPanel {
                 Bets.getBets().sortByNames();
             }            
             DefaultTableModel model = Verify.getModel(Bets.getBets().getAccepted());
-            tableResults.setModel(model);
+            jTable2.setModel(model);
             SwingUtilities.updateComponentTreeUI(this);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(Bets.getBets().isFinished()){
+            Bets bets = Bets.getBets();
+            if(FileManagment.selectDirectory() && FileManagment.save(bets.getAccepted())){            
+                    JOptionPane.showMessageDialog(this, "Archivo guardado con éxito");            
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -487,6 +514,7 @@ public class PanelResultados extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> combo8;
     private javax.swing.JComboBox<String> combo9;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -504,6 +532,6 @@ public class PanelResultados extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable tableResults;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
