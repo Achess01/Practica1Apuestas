@@ -400,7 +400,7 @@ public class PanelApuestas extends javax.swing.JPanel {
             int value = JOptionPane.showConfirmDialog(this, "¿Quiere cerrar las apuestas?", "Verificar", JOptionPane.YES_NO_OPTION);
             if(value == 0){
                 bets.validate();                
-                saveFile();
+                //saveFile();
             }
         }else{
             saveFile();
